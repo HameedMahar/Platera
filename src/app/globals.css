@@ -12,3 +12,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
 }
+@theme {
+  --color-primary: #e21b70;
+  --color-primary-dark: #c2145f;
+}
