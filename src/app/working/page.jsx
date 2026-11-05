@@ -1,7 +1,14 @@
-import React from 'react';
+import AboutUs from '@/components/AboutUs';
 
-const page = () => {
-  return <div>page</div>;
+export const metadata = {
+  title: 'About Us - PLATERA Team',
+  description: 'Meet the executive leadership and engineering team behind PLATERA.',
 };
 
-export default page;
+export default function WorkingPage() {
+  return (
+    <main className="min-h-screen">
+      <AboutUs />
+    </main>
+  );
+}
