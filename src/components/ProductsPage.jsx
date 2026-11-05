@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
+import { Search, SearchCodeIcon } from 'lucide-react';
 
 /* ─── Static product catalogue ─────────────────────────────────── */
 const PRODUCTS = [
@@ -12,8 +13,7 @@ const PRODUCTS = [
     name: 'Grilled Salmon Bowl',
     price: 18.99,
     desc: 'Tender Atlantic salmon over jasmine rice with seasonal greens.',
-    badge: "Chef's Pick",
-    emoji: '🐟',
+    image: '/images/beef steak.png',
     tags: ['Protein', 'Healthy'],
   },
   {
@@ -22,8 +22,7 @@ const PRODUCTS = [
     name: 'Truffle Mushroom Pasta',
     price: 16.5,
     desc: 'Hand-rolled pappardelle with wild mushrooms & black truffle oil.',
-    badge: 'Popular',
-    emoji: '🍝',
+    image: '/images/beef steak.png',
     tags: ['Vegetarian'],
   },
   {
@@ -32,8 +31,7 @@ const PRODUCTS = [
     name: 'Smash Burger Duo',
     price: 14.99,
     desc: 'Double smash patties, cheddar, caramelised onions, house sauce.',
-    badge: null,
-    emoji: '🍔',
+    image: '/images/beef steak.png',
     tags: ['Bestseller'],
   },
   {
@@ -42,8 +40,7 @@ const PRODUCTS = [
     name: 'Mezze Platter',
     price: 12.0,
     desc: 'Hummus, baba ganoush, falafel, pita & pickled veg for two.',
-    badge: 'Share',
-    emoji: '🫙',
+    image: '/images/beef steak.png',
     tags: ['Vegan', 'Sharing'],
   },
   {
@@ -52,8 +49,7 @@ const PRODUCTS = [
     name: 'Avocado Toast Deluxe',
     price: 10.5,
     desc: 'Sourdough, smashed avocado, poached egg, chilli flakes & micro herbs.',
-    badge: null,
-    emoji: '🥑',
+    image: '/images/beef steak.png',
     tags: ['Brunch', 'Healthy'],
   },
   {
@@ -62,8 +58,7 @@ const PRODUCTS = [
     name: 'Wagyu Steak Frites',
     price: 34.0,
     desc: '200g Wagyu sirloin, garlic butter, hand-cut fries & béarnaise.',
-    badge: 'Premium',
-    emoji: '🥩',
+    image: '/images/beef steak.png',
     tags: ['Premium'],
   },
   /* Drinks */
@@ -73,8 +68,7 @@ const PRODUCTS = [
     name: 'Cold Brew Espresso',
     price: 5.5,
     desc: 'Slow-steeped 20-hour cold brew with a double espresso float.',
-    badge: 'Fan Fav',
-    emoji: '☕',
+    image: '/images/beef steak.png',
     tags: ['Caffeine'],
   },
   {
@@ -83,8 +77,7 @@ const PRODUCTS = [
     name: 'Tropical Smoothie',
     price: 7.0,
     desc: 'Mango, pineapple, coconut milk, banana & a hint of ginger.',
-    badge: null,
-    emoji: '🥭',
+    image: '/images/beef steak.png',
     tags: ['Fresh', 'Vegan'],
   },
   {
@@ -93,8 +86,7 @@ const PRODUCTS = [
     name: 'Artisan Lemonade',
     price: 4.75,
     desc: 'Freshly squeezed lemon, lavender syrup & sparkling water.',
-    badge: 'New',
-    emoji: '🍋',
+    image: '/images/beef steak.png',
     tags: ['Refreshing'],
   },
   {
@@ -103,8 +95,7 @@ const PRODUCTS = [
     name: 'Matcha Latte',
     price: 6.0,
     desc: 'Ceremonial-grade matcha with oat milk, lightly sweetened.',
-    badge: 'Popular',
-    emoji: '🍵',
+    image: '/images/beef steak.png',
     tags: ['Healthy'],
   },
   {
@@ -113,8 +104,7 @@ const PRODUCTS = [
     name: 'Berry Kombucha',
     price: 5.25,
     desc: 'Wild-fermented blend of mixed berries and hibiscus.',
-    badge: null,
-    emoji: '🫐',
+    image: '/images/beef steak.png',
     tags: ['Probiotic', 'Vegan'],
   },
   {
@@ -123,8 +113,7 @@ const PRODUCTS = [
     name: 'Sparkling Sangria',
     price: 9.0,
     desc: 'Chilled red wine, brandy, citrus, and seasonal fruits.',
-    badge: 'Seasonal',
-    emoji: '🍷',
+    image: '/images/beef steak.png',
     tags: ['Alcoholic'],
   },
 ];
@@ -209,24 +198,18 @@ function ProductCard({ product, onAdd }) {
 
   return (
     <div className='group bg-white rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md hover:border-[#CE410C]/30 transition-all duration-200 flex flex-col overflow-hidden max-w-90'>
-      {/* Illustrated colour panel */}
-      <div className='relative h-36 bg-gradient-to-br from-[#eedfd8] via-[#e5cfc5] to-[#c7a496] flex items-center justify-center overflow-hidden'>
-        {/* Ambient glows */}
-        <div className='absolute -top-6 -left-6 w-24 h-24 rounded-full bg-[#CE410C]/15 blur-2xl pointer-events-none' />
-        <div className='absolute -bottom-4 right-0 w-20 h-20 rounded-full bg-[#611F11]/20 blur-2xl pointer-events-none' />
-        <span className='relative text-6xl select-none drop-shadow'>
-          {product.emoji}
-        </span>
-
-        {/* Badge */}
-        {product.badge && (
-          <span
-            className={`absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${BADGE_STYLES[product.badge] ?? 'bg-zinc-700 text-white'}`}
-          >
-            {product.badge}
-          </span>
-        )}
+      <div className='relative text-6xl select-none drop-shadow'>
+        <Image src={product.image} alt='product' width={500} height={500} />
       </div>
+
+      {/* Badge */}
+      {product.badge && (
+        <span
+          className={`absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${BADGE_STYLES[product.badge] ?? 'bg-zinc-700 text-white'}`}
+        >
+          {product.badge}
+        </span>
+      )}
 
       {/* Content */}
       <div className='flex flex-col flex-1 p-4 gap-2'>
@@ -362,75 +345,21 @@ export default function ProductsPage() {
 
   /* ─── Render ───────────────────────────────────────────────────── */
   return (
-    <div className='relative w-full  overflow-hidden grid grid-cols-1 lg:grid-cols-12 '>
-      {/* ── LEFT PANEL: illustrated brand sidebar ── */}
-      <div className='relative lg:col-span-3 xl:col-span-3 flex flex-col p-6 sm:p-8 overflow-hidden bg-primary'>
-        <div className='absolute -bottom-20 left-1/4 w-72 h-72 rounded-full bg-[#611F11]/25 blur-3xl pointer-events-none' />
-
-        {/* Brand */}
-        <div className='relative z-10 flex items-center gap-3 mb-8'>
-          <Image
-            src='/images/logo.png'
-            alt='Platera Logo'
-            width={44}
-            height={44}
-            className='object-contain bg-white rounded-full p-2'
-            priority
-          />
-          <div>
-            <span className='font-extrabold text-xl tracking-tight text-white'>
-              Platera
-            </span>
-            <span className='block text-xs font-medium text-white/50 tracking-wider uppercase'>
-              Food & Drinks
-            </span>
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className='relative z-10 grid grid-cols-2 gap-3 mt-4'>
-          {[
-            { label: 'Menu Items', value: `${PRODUCTS.length}` },
-            { label: 'Categories', value: '2' },
-            { label: 'Avg. Rating', value: '4.9★' },
-            { label: 'Delivery', value: '25 min' },
-          ].map((s) => (
-            <div
-              key={s.label}
-              className=' backdrop-blur-sm rounded-xl p-3 border border-white/30'
-            >
-              <div className='text-lg font-extrabold text-white'>{s.value}</div>
-              <div className='text-[10px] font-medium text-white/40 uppercase tracking-wider'>
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Footer */}
-        <div className='relative z-10 flex items-center justify-between text-xs font-medium text-white/80 pt-4 mt-4 border-t border-white/15'>
-          <span>Fresh daily</span>
-          <span className='flex items-center gap-1.5'>
-            <span className='w-2 h-2 rounded-full bg-[#CE410C] animate-pulse' />
-            Kitchen Open
-          </span>
-        </div>
-      </div>
-
+    <div className='relative w-full  overflow-hidden grid grid-cols-1 lg:grid-cols-8 place-items-center'>
       {/* ── RIGHT PANEL: product catalogue ── */}
       <div className='lg:col-span-9 xl:col-span-9 bg-[#ffffff] flex flex-col overflow-hidden'>
         {/* Top bar */}
-        <div className='px-6 sm:px-8 pt-7 pb-5 border-b border-zinc-100'>
-          <div className='flex flex-wrap items-center justify-between gap-4'>
+        <div className='px-6 sm:px-8 pt-7 pb-5 border-b border-zinc-100 relative mt-8'>
+          <div>
+            <h1 className='text-2xl text-center sm:text-5xl font-extrabold tracking-tight text-[#611F11]'>
+              Our Menu
+            </h1>
+            <p className='text-sm text-zinc-400 mt-0.5 text-center'>
+              Hand-crafted flavours, made fresh every day
+            </p>
+          </div>
+          <div className='flex  gap-4 absolute right-10 top-10'>
             {/* Title */}
-            <div>
-              <h1 className='text-2xl sm:text-3xl font-extrabold tracking-tight text-[#611F11]'>
-                Our Menu
-              </h1>
-              <p className='text-sm text-zinc-400 mt-0.5'>
-                Hand-crafted flavours, made fresh every day
-              </p>
-            </div>
 
             {/* Cart button */}
             <button
@@ -448,32 +377,32 @@ export default function ProductsPage() {
           </div>
 
           {/* Search + Category tabs */}
-          <div className='mt-5 flex flex-wrap items-center gap-3'>
+          <div className='mt-5 flex flex-col flex-wrap items-center gap-3'>
             {/* Search */}
-            <div className='relative flex-1 min-w-[180px] max-w-xs'>
+            <div className='relative flex-1 min-w-[180px] w-lg'>
               <div className='absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400'>
-                <SearchIcon />
+                <Search />
               </div>
               <input
                 type='text'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder='Search menu…'
-                className='w-full pl-10 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#CE410C] focus:ring-2 focus:ring-[#CE410C]/20 transition-all'
+                className='w-full pl-10 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-full text-sm text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#CE410C] focus:ring-2 focus:ring-[#CE410C]/20 transition-all'
               />
             </div>
 
             {/* Category pills */}
-            <div className='flex items-center bg-zinc-100 p-1 rounded-full text-xs font-semibold gap-0.5'>
+            <div className='flex items-center bg-zinc-100 p-2 rounded-full text-xs font-semibold gap-3 mt-3'>
               {[
-                { key: 'all', label: '🍽 All' },
-                { key: 'food', label: '🍔 Food' },
-                { key: 'drink', label: '🥤 Drinks' },
+                { key: 'all', label: 'All' },
+                { key: 'food', label: 'Food' },
+                { key: 'drink', label: 'Drinks' },
               ].map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveCategory(tab.key)}
-                  className={`px-4 py-1.5 rounded-full transition-all ${
+                  className={`px-7 py-3 text-lg rounded-full transition-all ${
                     activeCategory === tab.key
                       ? 'bg-white text-[#611F11] shadow-sm font-bold'
                       : 'text-zinc-500 hover:text-zinc-800'
@@ -509,7 +438,7 @@ export default function ProductsPage() {
                 </button>
               </div>
             ) : (
-              <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 place-items-center'>
                 {filtered.map((p) => (
                   <ProductCard key={p.id} product={p} onAdd={addToCart} />
                 ))}
@@ -519,7 +448,7 @@ export default function ProductsPage() {
 
           {/* Cart sidebar (slide-in) */}
           {cartOpen && (
-            <div className='w-72 shrink-0 border-l border-zinc-100 bg-zinc-50 flex flex-col'>
+            <div className='w-72 shrink-0 border-l border-zinc-100 bg-zinc-50 flex flex-col fixed top-0 right-4 min-w-100 h-full'>
               <div className='px-5 py-4 border-b border-zinc-100 flex items-center justify-between'>
                 <h2 className='font-bold text-[#611F11] text-sm'>Your Order</h2>
                 <button
@@ -578,7 +507,7 @@ export default function ProductsPage() {
                     key={item.product.id}
                     className='bg-white rounded-xl p-3 border border-zinc-200 shadow-sm flex items-start gap-3'
                   >
-                    <span className='text-2xl'>{item.product.emoji}</span>
+                    <span className='text-2xl'>{item.product.image}</span>
                     <div className='flex-1 min-w-0'>
                       <p className='text-xs font-bold text-zinc-800 leading-tight truncate'>
                         {item.product.name}
