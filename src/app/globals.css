@@ -132,7 +132,3 @@
     @apply font-sans;
   }
 }
-@theme {
-  --color-primary: #e21b70;
-  --color-primary-dark: #c2145f;
-}
